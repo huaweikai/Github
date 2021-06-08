@@ -3,13 +3,13 @@ package com.example.github
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.os.PersistableBundle
-import android.util.Log
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     private var sum=0
+    val text:TextView=findViewById(R.id.textview);
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,6 +29,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu,menu);
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==R.id.menu){
+            sum=0;
+            text.text="${sum}"
+        }
+        return super.onOptionsItemSelected(item)
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
