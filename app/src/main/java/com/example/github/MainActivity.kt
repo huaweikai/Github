@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         val button: Button=findViewById(R.id.button);
         val text:TextView=findViewById(R.id.textview);
         var sum:Int=0;
+        text.text="0"
         button.setOnClickListener{
             text.text= (sum++).toString()
         }
