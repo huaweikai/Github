@@ -2,11 +2,13 @@ package com.example.github
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Button
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val button: Button=findViewById(R.id.button);
@@ -20,5 +22,10 @@ class MainActivity : AppCompatActivity() {
         button2.setOnClickListener{
             text.text= (sum--).toString()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu)
     }
 }
