@@ -1,4 +1,4 @@
-package com.example.github
+ package com.example.github
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,23 +6,24 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
-    private var sum=0
-    val text:TextView=findViewById(R.id.textview);
+    private  lateinit var myViewModel: MyViewModel
+    lateinit var text:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val button: Button=findViewById(R.id.button);
-        val button2: Button=findViewById(R.id.button2);
-        val text:TextView=findViewById(R.id.textview);
-        var sum:Int=0;
-        text.text="0"
+        myViewModel=ViewModelProvider(this).get(MyViewModel::class.java)
+        text=findViewById(R.id.textview)
+        val button: Button=findViewById(R.id.button)
+        val button2: Button=findViewById(R.id.button2)
+        text.text="${myViewModel.number}"
         button.setOnClickListener{
-            text.text= (sum++).toString()
+            text.text= (myViewModel.number++).toString()
         }
         button2.setOnClickListener{
-            text.text= (sum--).toString()
+            text.text= (myViewModel.number--).toString()
         }
     }
 
@@ -33,15 +34,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId==R.id.menu){
-            sum=0;
-            text.text="${sum}"
+            myViewModel.number=0
+            text.text="${myViewModel.number}"
         }
         return super.onOptionsItemSelected(item)
-
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt("NUMBER",sum)
     }
 }
