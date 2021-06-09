@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
@@ -18,12 +19,14 @@ class MainActivity : AppCompatActivity() {
         text=findViewById(R.id.textview)
         val button: Button=findViewById(R.id.button)
         val button2: Button=findViewById(R.id.button2)
-        text.text="${myViewModel.number}"
+        myViewModel.number.observe(this, Observer {
+            text.text="${it}"
+        })
         button.setOnClickListener{
-            text.text= (myViewModel.number++).toString()
+            myViewModel.add(1)
         }
         button2.setOnClickListener{
-            text.text= (myViewModel.number--).toString()
+            myViewModel.add(-1)
         }
     }
 
@@ -34,8 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId==R.id.menu){
-            myViewModel.number=0
-            text.text="${myViewModel.number}"
+            myViewModel.resert()
         }
         return super.onOptionsItemSelected(item)
     }
